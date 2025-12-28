@@ -13,9 +13,7 @@ import {
   FiX,
   FiInbox,
   FiList,
-  FiCrosshair,
 } from "react-icons/fi";
-import { RxCross2 } from "react-icons/rx";
 
 const Dashboard = () => {
   const { logout } = useAuth();
@@ -166,7 +164,7 @@ const Dashboard = () => {
                     onClick={() => handleToggleDone(task.id)}
                     title={task.done ? "Mark as incomplete" : "Mark as complete"}
                   >
-                    {task.done ? <RxCross2 size={30} /> : <FiCheckSquare size={30} />}
+                    {task.done ?<FiCheckSquare size={30} /> : <FiSquare size={30} />}
                   </button>
                   <div className="task-content">
                     <div className="task-title">{task.title}</div>

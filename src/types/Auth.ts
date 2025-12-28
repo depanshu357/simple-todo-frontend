@@ -1,5 +1,18 @@
 import type { ReactNode } from "react";
 
+export interface GoogleLoginData {
+    credential: string;
+}
+
+export interface GoogleLoginResponse {
+    token: string;
+    user?: {
+        id: string;
+        username: string;
+        email: string;
+    }
+}
+
 export interface SignUpData {
     username: string;
     email: string;

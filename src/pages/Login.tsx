@@ -1,16 +1,18 @@
 import "../styles/login.css";
 import type React from "react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContexts";
 import { authService } from "../api/services/auth.services";
 import { useNavigate, Link } from "react-router";
 import { FiUser, FiLock, FiLogIn } from "react-icons/fi";
+import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +28,25 @@ const Login = () => {
       console.error(e);
     }
   };
+
+  const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
+    try{
+      if(credentialResponse.credential){
+        const res = await authService.googleLogin({
+          credential: credentialResponse.credential,
+        });
+        login(res.token);
+        navigate("/dashboard");
+      }
+    } catch (e) {
+      console.error(e);
+      setError("Google login failed. Please try again.")
+    }
+  }
+
+  const handleGoogleError = () => {
+    setError("Google Login was cancelled for failed.");
+  }
 
   return (
     <div className="login-container">
@@ -73,6 +94,21 @@ const Login = () => {
             Sign In
           </button>
         </form>
+
+        <div className="divider">
+          <span>or continue with</span>
+        </div>
+
+        <div className="oauth-buttons">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            theme="filled_blue"
+            size="large"
+            width="100%"
+            text="signin_with"
+          />
+        </div>
 
         <div className="login-footer">
           <p>
