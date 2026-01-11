@@ -26,6 +26,8 @@ const Login = () => {
       });
     } catch (e) {
       console.error(e);
+      setError("Invalid username or password. Please try again.");
+      
     }
   };
 
@@ -115,6 +117,7 @@ const Login = () => {
             Don't have an account? <Link to="/signup">Create one</Link>
           </p>
         </div>
+        {error && <div className="error-message">{error}</div>}
       </div>
     </div>
   );
