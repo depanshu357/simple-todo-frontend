@@ -18,5 +18,5 @@ export const authService = {
         console.log(data);
         const response = authClient.post('/google-login', data);
         return (await response).data;
-    }
+    } 
 }
