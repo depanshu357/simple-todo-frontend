@@ -40,7 +40,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/simple-todo-frontend",
+    basename: "/",
   }
 );
 
