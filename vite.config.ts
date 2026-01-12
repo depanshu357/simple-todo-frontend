@@ -10,5 +10,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/simple-todo-frontend/"
+  base: "/"
 })
