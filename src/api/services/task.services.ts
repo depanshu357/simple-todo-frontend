@@ -6,6 +6,7 @@ const taskClient = axios.create({
     baseURL: `${client.defaults.baseURL}/tasks`,
     headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',  // Skip ngrok interstitial page
     }
 })
 

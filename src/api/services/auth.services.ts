@@ -6,6 +6,7 @@ const authClient = axios.create({
     baseURL: `${client.defaults.baseURL}/auth`,
     headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',  // Skip ngrok interstitial page
     }
 })
 

@@ -29,7 +29,15 @@ const Dashboard = () => {
   };
 
   const fetchAllTasks = () => {
-    taskService.getAllTasks().then(setTaskList);
+    taskService.getAllTasks()
+      .then((data) => {
+        // Ensure we always set an array
+        setTaskList(Array.isArray(data) ? data : []);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch tasks:', error);
+        setTaskList([]);
+      });
   };
 
   const handleCreateTask = (e: React.FormEvent) => {
