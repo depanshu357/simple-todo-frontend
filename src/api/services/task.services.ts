@@ -23,6 +23,19 @@ taskClient.interceptors.request.use(
     }
 )
 
+// Handle 401/403 responses (expired token, unauthorized)
+taskClient.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401 || error.response?.status === 403) {
+            // Token is invalid or expired - clear it and redirect to login
+            localStorage.removeItem('todoAuthToken');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+)
+
 export const taskService = {
     async getAllTasks(): Promise<Task[]> {
         const response = taskClient.get('/all')
