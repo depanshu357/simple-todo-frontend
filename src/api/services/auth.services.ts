@@ -1,8 +1,12 @@
+import axios from "axios";
 import type { GoogleLoginData, GoogleLoginResponse, LoginData, LoginResponse, SignUpData, SignUpRespone } from "../../types/Auth"
 import client from "../client"
 
-const authClient = client.create({
-    baseURL: `${client.defaults.baseURL}/auth`
+const authClient = axios.create({
+    baseURL: `${client.defaults.baseURL}/auth`,
+    headers: {
+        'Content-Type': 'application/json',
+    }
 })
 
 export const authService = {

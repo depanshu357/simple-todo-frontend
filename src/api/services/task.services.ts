@@ -1,7 +1,8 @@
+import axios from "axios";
 import type { Task, TaskRequest } from "../../types/Task";
 import client from "../client";
 
-const taskClient = client.create({
+const taskClient = axios.create({
     baseURL: `${client.defaults.baseURL}/tasks`,
     headers: {
         'Content-Type': 'application/json',
